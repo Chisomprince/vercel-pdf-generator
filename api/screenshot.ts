@@ -70,9 +70,7 @@ export default async (req: any, res: any) => {
   await page.goto(url);
 
   const pdfBuffer = await page.pdf({
-    path: `resume.pdf`,
     format: "A4",
-    printBackground: true,
   });
 
   await browser.close();
