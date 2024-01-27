@@ -67,10 +67,11 @@ export default async (req: any, res: any) => {
   // const url = getAbsoluteURL(`?hash=${hash}`, path)
   const url = body.url;
 
-  await page.goto(url);
+  await page.goto(url, { waitUntil: "networkidle0" });
 
   const pdfBuffer = await page.pdf({
     format: "A4",
+    printBackground: true,
   });
 
   await browser.close();
