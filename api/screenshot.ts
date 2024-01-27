@@ -72,6 +72,7 @@ export default async (req: any, res: any) => {
   const pdfBuffer = await page.pdf({
     format: "A4",
     printBackground: true,
+    margin: { top: "100px", right: "50px", bottom: "100px", left: "50px" },
   });
 
   await browser.close();
