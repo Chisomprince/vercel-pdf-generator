@@ -1,22 +1,6 @@
 const chrome = require("@sparticuz/chromium");
 const puppeteer = require("puppeteer-core");
 
-const performCanvasCapture = async (page: any, canvasSelector: string) => {
-  try {
-    // get the base64 image from the CANVAS targetted
-    const base64 = await page.$eval(canvasSelector, (el) => {
-      if (!el || el.tagName !== "CANVAS") return null;
-      return el.toDataURL();
-    });
-    if (!base64) throw new Error("No canvas found");
-    // remove the base64 mimetype at the beginning of the string
-    const pureBase64 = base64.replace(/^data:image\/png;base64,/, "");
-    return Buffer.from(pureBase64, "base64");
-  } catch (err) {
-    return null;
-  }
-};
-
 export default async (req: any, res: any) => {
   let { body, method } = req;
 
@@ -72,7 +56,7 @@ export default async (req: any, res: any) => {
   const pdfBuffer = await page.pdf({
     format: "A4",
     printBackground: true,
-    margin: { top: "100px", right: "50px", bottom: "100px", left: "50px" },
+
   });
 
   await browser.close();

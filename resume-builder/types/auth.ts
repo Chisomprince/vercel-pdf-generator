@@ -1,0 +1,3 @@
+type authType = {
+  email: string;
+};
